@@ -16,6 +16,16 @@
                         {{ __('Dashboard') }}
                     </x-nav-link>
                 </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link :href="route('companies.index')" :active="request()->routeIs('companies.index')">
+                        {{ __('Companies') }}
+                    </x-nav-link>
+                </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link :href="route('jobposts.index')" :active="request()->routeIs('jobposts.index')">
+                        {{ __('Job Posts') }}
+                    </x-nav-link>
+                </div>
             </div>
 
             <!-- Settings Dropdown -->
@@ -71,7 +81,12 @@
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
         </div>
-
+        <x-responsive-nav-link :href="route('companies.index')" :active="request()->routeIs('companies.index')">
+            {{ __('Companies') }}
+        </x-responsive-nav-link>
+        <x-responsive-nav-link :href="route('jobposts.index')" :active="request()->routeIs('jobposts.index')">
+            {{ __('Job Posts') }}
+        </x-responsive-nav-link>
         <!-- Responsive Settings Options -->
         <div class="pt-4 pb-1 border-t border-gray-200">
             <div class="px-4">
