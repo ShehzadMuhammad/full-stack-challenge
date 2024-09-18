@@ -82,6 +82,7 @@
                     <p class="card-text"><strong>Industry:</strong> {{ $company->industry }}</p>
                     <p class="card-text"><strong>Location:</strong> {{ $company->location }}</p>
                     <p class="card-text"><strong>Number of Employees:</strong> {{ $company->number_of_employees }}</p>
+                    <p>Number of Job Posts: {{ $company->job_posts_count }}</p>
                 </div>
             </div>
             @endforeach

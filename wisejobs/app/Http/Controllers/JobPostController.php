@@ -4,23 +4,39 @@ namespace App\Http\Controllers;
 
 use App\Models\Company;
 use App\Models\JobPost;
+use App\Enums\PositionTypeEnum;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Validation\Rule;
-use App\Enums\PositionTypeEnum;
 
 class JobPostController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index(): View
+    public function index(Request $request): View
     {
 
-        $jobposts = JobPost::all();
+        $query = JobPost::query();
 
-        return view('jobposts.index', compact('jobposts'));
+        $positionTypes = PositionTypeEnum::cases();
+        $locations = JobPost::select('location')->distinct()->pluck('location');
+        if ($request->filled('position_type')) {
+            $query->where('position_type', $request->position_type);
+        }
+    
+        if ($request->filled('location')) {
+            $query->where('location', 'like', '%' . $request->location . '%');
+        }
+    
+        if ($request->filled('salary')) {
+            $query->where('salary', '>=', $request->salary);
+        }
+    
+        $jobposts = $query->with('company')->get();
+
+        return view('jobposts.index', compact('jobposts', 'positionTypes', 'locations'));
     }
 
     /**

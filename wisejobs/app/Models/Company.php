@@ -13,7 +13,7 @@ class Company extends Model
 
     public function jobposts(): HasMany
     {
-        return $this->hasMany(JobPosts::class);
+        return $this->hasMany(JobPost::class);
     }
 
     protected $fillable = [
