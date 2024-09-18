@@ -1,5 +1,5 @@
 <x-app-layout>
-    <div class="max-w-2xl mx-auto p-4 sm:p-6 lg:p-8">
+    <div class="button-container">
         <x-primary-button class="mt-4" x-data="" x-on:click="$dispatch('open-modal', 'create-company')">{{ __('Create Company') }} </x-primary-button>
         <x-modal name="create-company" :show="false" focusable>
         <form method="POST" action="{{ route('companies.store') }}">
@@ -32,9 +32,6 @@
         </div>
         </form>
     </x-modal>
-    </div>
-
-    <div class="max-w-2xl mx-auto p-4 sm:p-6 lg:p-8">
         <x-primary-button class="mt-4" x-data="" x-on:click="$dispatch('open-modal', 'create-job-post')">{{ __('Create Job Post') }} </x-primary-button>
         <x-modal name="create-job-post" :show="false" focusable>
         <form method="POST" action="{{ route('jobposts.store') }}">
@@ -76,4 +73,18 @@
     </div>
     </x-modal>
     </div>
-</x-app-layout>
+    <section>
+        <div class="flex-container">
+            @foreach($companies as $company)
+            <div class="card">
+                <div class="card-body">
+                    <h3 class="card-title">{{ $company->name }}</h3>
+                    <p class="card-text"><strong>Industry:</strong> {{ $company->industry }}</p>
+                    <p class="card-text"><strong>Location:</strong> {{ $company->location }}</p>
+                    <p class="card-text"><strong>Number of Employees:</strong> {{ $company->number_of_employees }}</p>
+                </div>
+            </div>
+            @endforeach
+        </div>
+    </section>
+</x-app-layot>
