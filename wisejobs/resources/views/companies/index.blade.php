@@ -1,9 +1,16 @@
 <x-app-layout>
     <div class="max-w-2xl mx-auto p-4 sm:p-6 lg:p-8">
+        <x-primary-button class="mt-4" x-data="" x-on:click="$dispatch('open-modal', 'create-company')">{{ __('Create Company') }} </x-primary-button>
+        <x-modal name="create-company" :show="false" focusable>
         <form method="POST" action="{{ route('companies.store') }}">
             @csrf
+            <div class="form-body">
+            <h2>Create Company</h2>
+            <label for="name">Company Name</label>
             <input type="text" id="name" name="name" placeholder="Enter Company Name">
+            <label for="industry">Industry</label>
             <input type="text" id="industry" name="industry" placeholder="Enter Industry">
+            <label for="location">Location</label>
             <input type="text" id="location" name="location" placeholder="Enter Location">
             <label for="number_of_employees">Number of Employees</label>
             <select id="number_of_employees" name="number_of_employees" class="form-control" required>
@@ -16,19 +23,31 @@
             @error('number_of_employees')
                 <div class="text-danger">{{ $message }}</div>
             @enderror
-            <x-primary-button class="mt-4">{{ __('Create Company') }}</x-primary-button>
+            <div class="mt-6 flex justify-end">
+                <x-secondary-button x-on:click="$dispatch('close')">
+                    {{ __('Cancel') }}
+                </x-secondary-button>
+            <x-primary-button class="ms-3" width="4rem">{{ __('Create') }}</x-primary-button>
+            </div>
+        </div>
         </form>
+    </x-modal>
     </div>
+
     <div class="max-w-2xl mx-auto p-4 sm:p-6 lg:p-8">
+        <x-primary-button class="mt-4" x-data="" x-on:click="$dispatch('open-modal', 'create-job-post')">{{ __('Create Job Post') }} </x-primary-button>
+        <x-modal name="create-job-post" :show="false" focusable>
         <form method="POST" action="{{ route('jobposts.store') }}">
             @csrf
+            <div class="form-body">
+            <h2>Create Job Post</h2>
+            <label for="job_title">Job Title</label>
             <input type="text" id="job_title" name="job_title" placeholder="Enter Job Title">
             <label for="salary">Salary</label>
             <input type="number" step="0.01" id="salary" name="salary" value="{{ old('salary') }}" placeholder="Enter Salary">
-            @error('salary')
-                <div class="text-danger">{{ $message }}</div>
-            @enderror
+            <label for="location">Location</label>
             <input type="text" id="location" name="location" placeholder="Enter Location">
+            <label for="position_type">Position Type</label>
             <select id="position_type" name="position_type" class="form-control" required>
                 @foreach (\App\Enums\PositionTypeEnum::cases() as $position_type)
                     <option value="{{ $position_type->value }}" {{ old('position_type') == $position_type->value ? 'selected' : '' }}>
@@ -36,9 +55,6 @@
                     </option>
                 @endforeach
             </select>
-            @error('number_of_employees')
-                <div class="text-danger">{{ $message }}</div>
-            @enderror
             <label for="company_id">Company</label>
             <select id="company_id" name="company_id" required>
                 @foreach($companies as $company)
@@ -50,7 +66,14 @@
             @error('company_id')
                 <div class="text-danger">{{ $message }}</div>
             @enderror
-            <x-primary-button class="mt-4">{{ __('Create Job Post') }}</x-primary-button>
+            <div class="mt-6 flex justify-end">
+                <x-secondary-button x-on:click="$dispatch('close')">
+                    {{ __('Cancel') }}
+                </x-secondary-button>
+                <x-primary-button class="ms-3">{{ __('Create Job Post') }}</x-primary-button>
+            </div>
         </form>
+    </div>
+    </x-modal>
     </div>
 </x-app-layout>

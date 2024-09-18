@@ -32,3 +32,15 @@
 .card-text {
     margin: 0.25rem 0;
     }
+
+.form-body {
+    display: flex;
+    gap:1rem; 
+    margin: 1rem;
+    flex-direction: column;
+}
+
+.form-body button {
+    align-self: flex-end;
+    width: auto;
+}
