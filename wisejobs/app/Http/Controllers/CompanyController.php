@@ -58,9 +58,10 @@ class CompanyController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Company $company)
+    public function show(Company $company): View
     {
-        //
+        $jobPosts = $company->jobPosts()->paginate(5);
+        return view('companies.show', compact('company', 'jobPosts'));
     }
 
     /**
@@ -74,9 +75,11 @@ class CompanyController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Company $company)
+    public function update(Request $request, Company $company): RedirectResponse
     {
-        //
+        $company->update($request->all());
+
+        return redirect()->route('companies.show', $company->id)->with('success', 'Company updated successfully!');
     }
 
     /**
@@ -84,6 +87,7 @@ class CompanyController extends Controller
      */
     public function destroy(Company $company)
     {
-        //
+        $company->delete();
+        return redirect(route('companies.index'));
     }
 }

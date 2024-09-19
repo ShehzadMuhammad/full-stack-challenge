@@ -34,7 +34,7 @@ class JobPostController extends Controller
             $query->where('salary', '>=', $request->salary);
         }
     
-        $jobposts = $query->with('company')->get();
+        $jobposts = $query->with('company')->paginate(8)->appends($request->query());
 
         return view('jobposts.index', compact('jobposts', 'positionTypes', 'locations'));
     }
@@ -60,7 +60,7 @@ class JobPostController extends Controller
             'position_type' => ['required', Rule::in(array_column(PositionTypeEnum::cases(), 'value'))],
         ]);
 
-        JobPost::create([
+        $jobPost = JobPost::create([
             'job_title' => $validated['job_title'],
             'salary' => $validated['salary'],
             'location' => $validated['location'],
@@ -68,8 +68,7 @@ class JobPostController extends Controller
             'position_type' => $validated['position_type'],
         ]);
 
-        // Redirect with success message
-        return redirect()->route('companies.index')->with('success', 'Job Post created successfully!');
+        return redirect()->route('companies.show', ['company' => $jobPost->company_id])->with('success', 'Job Post created successfully!');
     }
 
     /**
@@ -91,16 +90,21 @@ class JobPostController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, JobPost $jobPost)
+    public function update(Request $request, JobPost $jobPost): View
     {
-        //
+        $jobPost->update($request->all());
+        return view('companies.index');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(JobPost $jobPost)
+    public function destroy(JobPost $jobPost): View
     {
-        //
+        $companyId = $jobPost->company_id;
+        dd($jobPost);
+        $jobPost->delete();
+
+        return view('companies.index');
     }
 }

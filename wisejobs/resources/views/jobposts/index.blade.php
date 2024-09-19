@@ -36,22 +36,27 @@
                 <x-secondary-button class="ms-3" onclick="window.location='{{ route('jobposts.index') }}'" width="4rem">{{ __('Clear') }}</x-secondary-button>
             </form>
         </div>
-        <div class="flex-container">
-            @foreach($jobposts as $jobpost)
-            <div class="card">
-                <div class="card-body">
-                    <h3 class="card-title">{{ $jobpost->job_title }}</h3>
-                    <p class="card-text"><strong>Salary:</strong> {{ $jobpost->salary }}</p>
-                    <p class="card-text"><strong>Position Type:</strong> {{ $jobpost->position_type }}</p>
-                    <p class="card-text"><strong>Location:</strong> {{ $jobpost->location }}</p>
-                    <p class="card-text"><strong>Company:</strong> {{ $jobpost->company->name }}</p>
+        <div class="job-posts-list">
+            <div class="flex-container">
+                @foreach($jobposts as $jobpost)
+                <div class="card">
+                    <div class="card-body">
+                        <h3 class="card-title">{{ $jobpost->job_title }}</h3>
+                        <p class="card-text"><strong>Salary:</strong> {{ $jobpost->salary }}</p>
+                        <p class="card-text"><strong>Position Type:</strong> {{ $jobpost->position_type }}</p>
+                        <p class="card-text"><strong>Location:</strong> {{ $jobpost->location }}</p>
+                        <p class="card-text"><strong>Company:</strong> {{ $jobpost->company->name }}</p>
+                    </div>
                 </div>
+                @endforeach
             </div>
-            @endforeach
+            <div class="pagination">
+                {{ $jobposts->links() }}
+            </div>
         </div>
+        
     </section>
 
-    <!-- Inline Script to Handle Form Submission -->
     <script>
         function submitFilterForm() {
             document.getElementById('filterForm').submit();
