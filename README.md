@@ -13,3 +13,8 @@ This challenge actually got me interested in making a project of my own in the f
 
 Unfortunately as earlier noted about my inexperience in Laravel I wasn't able to complete a bit of the website, particularly updating and deleting a job post and deleting a company, ran into some bugs and time ran out as well some componentizing etc. I am greatful for the opportunity and I'm glad I was able to try out Laravel!
 
+## Screenshots:
+<img width="1500" alt="Screenshot 2024-09-18 at 8 57 09 PM" src="https://github.com/user-attachments/assets/a980e79f-affe-464d-a57d-7a2855ab3050">
+<img width="1500" alt="Screenshot 2024-09-18 at 8 57 15 PM" src="https://github.com/user-attachments/assets/993a68e6-c2d9-4b4e-87b2-be1834ca7fd3">
+<img width="1500" alt="Screenshot 2024-09-18 at 8 57 25 PM" src="https://github.com/user-attachments/assets/50b28809-91ee-4c0f-8ab9-bf2798f773d8">
+<img width="1500" alt="Screenshot 2024-09-18 at 8 57 32 PM" src="https://github.com/user-attachments/assets/db5e8411-e9f0-476e-aa72-d08add837161">
